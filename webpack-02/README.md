@@ -38,3 +38,7 @@ postcss-loader
     },
   ],
   ```
+
+## jpg jpeg png gif
+
+file-loader src-loader

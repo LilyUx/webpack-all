@@ -1,0 +1,12 @@
+body {
+  background: url(../images/logo.png) 200px 200px no-repeat;
+}
+body div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid orange;
+}
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvaW5kZXgubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVFO0FBQUY7QUFGQTtFQUlJO0VBQUE7RUFBQTtFQUNBO0FBQ0oiLCJmaWxlIjoiY3NzL21haW4uY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gIC8vIGJhY2tncm91bmQtY29sb3I6IGdyZWVuO1xuICBiYWNrZ3JvdW5kOiB1cmwoXCIuL2xvZ28ucG5nXCIpIDIwMHB4IDIwMHB4IG5vLXJlcGVhdDtcbiAgZGl2IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGJvcmRlcjogMXB4IHNvbGlkIG9yYW5nZTtcbiAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ==*/
