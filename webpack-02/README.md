@@ -42,3 +42,13 @@ postcss-loader
 ## jpg jpeg png gif
 
 file-loader src-loader
+
+## webpack-dev-server
+
+- 创建本地服务器
+  - dist 目录中的文件加载到内存中，速度更快
+- 打包成功 自动帮助我们启动一个浏览器
+- 热更新
+- mock 数据 提升开发效率
+
+## 多页面打包通用方案

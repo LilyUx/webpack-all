@@ -2,12 +2,36 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const glob = require("glob");
+
+const setMap = () => {
+  const entry = {};
+  const htmlwebpackplugins = [];
+  const entryFiles = glob.sync(path.join(__dirname, "./src/*/index.js"));
+
+  entryFiles.map((item, index) => {
+    const reg = /src\/(.*)\/index\.js$/;
+    const match = item.match(reg);
+    const pageName = match[1];
+    entry[pageName] = item;
+    htmlwebpackplugins.push(
+      new htmlWebpackPlugin({
+        template: `./src/${pageName}/index.html`,
+        filename: `${pageName}.html`,
+        chunks: [pageName],
+      })
+    );
+  });
+  return {
+    entry,
+    htmlwebpackplugins,
+  };
+};
+
+const { entry, htmlwebpackplugins } = setMap();
 
 module.exports = {
-  entry: {
-    index: "./src/index.js",
-    list: "./src/list.js",
-  },
+  entry,
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
@@ -96,18 +120,7 @@ module.exports = {
     },
   },
   plugins: [
-    new htmlWebpackPlugin({
-      title: "My App",
-      filename: "index.html",
-      template: "./src/index.html",
-      chunks: ["index"],
-    }),
-    new htmlWebpackPlugin({
-      title: "My list",
-      filename: "list.html",
-      template: "./src/list.html",
-      chunks: ["list"],
-    }),
+    ...htmlwebpackplugins,
     new MiniCssExtractPlugin({
       filename: "css/[name].css",
     }),
