@@ -2,11 +2,14 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const webpack = require("webpack");
+
+const txtWebpackPlugin = require("./src/txt-webpack-plugin.js");
 
 module.exports = {
   entry: {
     index: "./src/index.js",
-    list: "./src/list.js",
+    // list: "./src/list.js",
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
@@ -60,6 +63,28 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.js$/,
+        use: "babel-loader",
+        // use: {
+        //   loader: "babel-loader",
+        //   options: {
+        //     presets: [
+        //       [
+        //         "@babel/preset-env",
+        //         {
+        //           targets: {
+        //             chrome: "66",
+        //             edge: "16",
+        //           },
+        //           corejs: 2,
+        //           useBuiltIns: "usage", // entry按需载入 usage自动检测 false不会排除使用的垫片
+        //         },
+        //       ],
+        //     ],
+        //   },
+        // },
+      },
       // {
       //   test: /\.less$/,
       //   use: ["ll-style-loader", "ll-css-loader", "ll-less-loader"],
@@ -89,6 +114,8 @@ module.exports = {
     contentBase: "./dist",
     open: true,
     port: 8081,
+    hot: true, // * 热更新
+    hotOnly: true, // * 关闭浏览器刷新
     proxy: {
       "/api": {
         target: "http://localhost:9000",
@@ -102,14 +129,18 @@ module.exports = {
       template: "./src/index.html",
       chunks: ["index"],
     }),
-    new htmlWebpackPlugin({
-      title: "My list",
-      filename: "list.html",
-      template: "./src/list.html",
-      chunks: ["list"],
-    }),
+    // new htmlWebpackPlugin({
+    //   title: "My list",
+    //   filename: "list.html",
+    //   template: "./src/list.html",
+    //   chunks: ["list"],
+    // }),
+    new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: "css/[name].css",
+    }),
+    new txtWebpackPlugin({
+      name: "lll",
     }),
     new CleanWebpackPlugin(),
   ],
